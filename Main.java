@@ -45,6 +45,19 @@ public class Main
       arr3[i] = sc.nextInt();
     }
     System.out.println("Has duplicate: " + hasDuplicates(arr3));
+
+
+    // Problem 4
+    System.out.println("Enter array length: ");
+    len = sc.nextInt();
+    sc.nextLine();
+
+    System.out.println("Enter values: ");
+    String[] arr4 = new String[len];
+    for (int i = 0; i < len; i++){
+      arr4[i] = sc.nextLine();
+    }
+    System.out.println("Mode is: " + findMode(arr4));
   }
 
   // Problem 1
@@ -73,24 +86,32 @@ public class Main
   // Problem 3
   public static boolean hasDuplicates(int[] arr)
   {
-    int count = 0;
     for (int i = 0; i < arr.length; i++){
-      for (int j = 0; j < arr.length; j++){
+      for (int j = i+1; j < arr.length; j++){
         if (arr[j] == arr[i]){
-          count++;
+          return true;
         }
       }
     }
-    if (count == arr.length){
-      return false;
-    } else {
-      return true;
-    }
+    return false;
   }
 
   public static String findMode(String[] arr)
   {
-    // replace with your code
-    return null;
+    String currentMode = arr[0];
+    int prevCount = 0;
+    for (int i = 0; i < arr.length; i++){
+      int currCount = 0;
+      for (int j = 0; j < arr.length; j++){
+        if (arr[j].equals(arr[i])){
+          currCount++;
+        }
+      }
+      if (currCount > prevCount){
+        prevCount = currCount;
+        currentMode = arr[i];
+      }
+    }
+    return currentMode;
   }
 }
